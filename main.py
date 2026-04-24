@@ -19,7 +19,6 @@ class SistemaLogistica:
         print(f"Produto {produto.nome} adicionado e estoque organizado!")
 
     def buscar_produto(self, id_alvo):
-        # TODO: Implemente a Busca Binária aqui para encontrar o nome do produto pelo ID
         inicio = 0
         fim = len(self.estoque) - 1
         while inicio <= fim:
