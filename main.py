@@ -7,7 +7,7 @@ class SistemaLogistica:
     def __init__(self):
         self.estoque = []      # Lista para busca binária
         self.pedidos = []      # Fila (FIFO)
-        self.devoluções = []   # Pilha (LIFO)
+        self.devolucoes = []   # Pilha (LIFO)
 
     def adicionar_produto(self, produto):
         self.estoque.append(produto)
@@ -32,16 +32,24 @@ class SistemaLogistica:
         return "Não encontrado"
 
     def novo_pedido(self, cliente):
-        # TODO: Adicione o cliente na FILA de pedidos
         self.pedidos.append(cliente)
 
     def processar_proximo_pedido(self):
         if self.pedidos:
-            # TODO: Remova o PRIMEIRO cliente da fila (O "arreda-arreda" lento, mas funcional)
             cliente = self.pedidos.pop(0)
             print(f"Processando pedido de: {cliente}")
         else:
             print("Nenhum pedido na fila.")
+
+    def registrar_devolucao(self, item):
+        self.devolucoes.append(item)
+
+    def conferir_devolucao(self):
+        if self.devolucoes:
+            item = self.devolucoes.pop()
+            print(f"Conferindo {item} para retorno ao estoque.")
+        else:
+            print(f"Nenhuama devolução na pilha.")
 
 # --- TESTANDO O SISTEMA ---
 logistica = SistemaLogistica()
@@ -53,3 +61,7 @@ print(f"Produto 101: {logistica.buscar_produto(101)}")
 logistica.novo_pedido("Ivano")
 logistica.novo_pedido("Maria")
 logistica.processar_proximo_pedido() 
+
+logistica.registrar_devolucao("Teclado Quebrado")
+logistica.registrar_devolucao("Cabo com Mau Contato")
+logistica.conferir_devolucao()
